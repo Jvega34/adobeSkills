@@ -1,0 +1,7 @@
+{
+  "name": "auditoria-journeys-ajo",
+  "description": "Auditoría en solo lectura de journeys de Adobe Journey Optimizer: revisión de diseño y de rendimiento separadas, hallazgos con evidencia, scorecard por dimensión y backlog priorizado por severidad y esfuerzo",
+  "version": "0.2.0",
+  "author": { "name": "Johan Vega" },
+  "keywords": ["ajo", "journey-optimizer", "auditoria", "health-check"]
+}
