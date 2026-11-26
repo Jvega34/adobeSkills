@@ -1,0 +1,7 @@
+{
+  "name": "auditoria-datos-aep",
+  "description": "Auditoría en solo lectura de los fundamentos de datos de Adobe Experience Platform: schemas, identidades, perfiles y merge policies, audiencias, ingesta, calidad y gobernanza. Revisión de configuración y de salud de datos separadas, scorecard por dimensión y backlog priorizado por severidad y esfuerzo",
+  "version": "0.1.0",
+  "author": { "name": "Johan Vega" },
+  "keywords": ["aep", "rt-cdp", "xdm", "identity", "auditoria", "health-check"]
+}
