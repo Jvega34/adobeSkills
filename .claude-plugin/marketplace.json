@@ -1,9 +1,11 @@
 {
   "name": "coworker-skills-ajo-aep",
-  "owner": { "name": "Johan Vega" },
+  "owner": {
+    "name": "Johan Vega"
+  },
   "metadata": {
     "description": "Health check de AJO/AEP para Adobe CX Enterprise Coworker: auditoría de journeys, fundamentos de datos y pre-flight de mensajes",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
@@ -11,7 +13,18 @@
       "source": "./plugins/practitioner/auditoria-journeys-ajo",
       "description": "Auditoría en solo lectura de journeys de AJO: revisión de diseño y de rendimiento separadas, scorecard por dimensión y backlog priorizado por severidad y esfuerzo",
       "version": "0.2.0",
-      "author": { "name": "Johan Vega" }
+      "author": {
+        "name": "Johan Vega"
+      }
+    },
+    {
+      "name": "auditoria-datos-aep",
+      "source": "./plugins/practitioner/auditoria-datos-aep",
+      "description": "Auditoría en solo lectura de los fundamentos de datos de AEP: revisión de configuración y de salud de datos separadas, scorecard por dimensión y backlog priorizado por severidad y esfuerzo",
+      "version": "0.1.0",
+      "author": {
+        "name": "Johan Vega"
+      }
     }
   ]
 }
