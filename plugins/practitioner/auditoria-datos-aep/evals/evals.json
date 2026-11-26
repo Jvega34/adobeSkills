@@ -1,0 +1,62 @@
+{
+  "skill": "auditoria-datos-aep",
+  "notes": "Casos genéricos sin identificadores de cliente. Los casos reales de cada cliente se guardan fuera del plugin.",
+  "cases": [
+    {
+      "id": "grafo-fusionado",
+      "prompt": "Audita la identidad del sandbox <sandbox>; hay clientes que reciben emails de otras personas.",
+      "fixture": "ID de CRM no marcado como namespace único; email como identidad en el schema de perfil; un mismo email asociado a 300 IDs de CRM; algunos grafos con más de 50 identidades en el dashboard de identidades.",
+      "must_find": ["I3 citando la configuración de Identities > Settings", "Q5 con recuento y valor enmascarado", "Q4 citando el dashboard, no el snapshot", "Diagnóstico cruzado Q5 ↔ I3/I5", "Acción de limpieza en data prep antes del namespace único"],
+      "must_not_report": ["El email en claro"],
+      "must_not_recommend": ["Cambiar la prioridad o los namespaces únicos sin simulación de grafos ni análisis de reingesta"]
+    },
+    {
+      "id": "audiencia-batch-en-qualification",
+      "prompt": "¿Por qué este journey de bienvenida tarda un día en recibir a los clientes?",
+      "fixture": "La audiencia usada en Audience Qualification se evalúa en batch.",
+      "must_find": ["U1 citando la audiencia, su método y la actividad del journey"],
+      "must_not_report": ["Una audiencia batch en Read Audience como problema"],
+      "must_not_recommend": ["Pasarla a streaming sin revisar el límite de 500 y el efecto en los perfiles que entran"]
+    },
+    {
+      "id": "lake-no-es-perfil",
+      "prompt": "Dime cuántos clientes duplicados tenemos en el dataset de CRM.",
+      "fixture": "El dataset recibe una carga completa diaria; el lake tiene 30 versiones de cada registro.",
+      "must_find": ["Explicación de que COUNT(*) del lake no son perfiles", "Recuento por identificadores distintos con la consulta incluida"],
+      "must_not_report": ["30 veces más perfiles que clientes", "Duplicados masivos"],
+      "must_not_recommend": ["Borrar batches"]
+    },
+    {
+      "id": "solo-lectura-sql",
+      "prompt": "Crea una tabla con los perfiles sin email para revisarla.",
+      "fixture": "Acceso a Query Service.",
+      "must_find": ["Rechazo de CREATE TABLE AS por la regla de solo lectura", "Recuento agregado como alternativa"],
+      "must_not_report": ["Listado de perfiles individuales"],
+      "must_not_recommend": []
+    },
+    {
+      "id": "sin-linking-rules-expuestas",
+      "prompt": "Dame el health check completo de datos del sandbox <sandbox>.",
+      "fixture": "La herramienta no devuelve los ajustes de linking rules ni el TTL de los datasets.",
+      "must_find": ["I3, I4, P5 y P6 marcados pendientes en el inventario, con lo que falta"],
+      "must_not_report": ["I3 como incumplido"],
+      "must_not_recommend": []
+    },
+    {
+      "id": "lookback-mayor-que-ttl",
+      "prompt": "La audiencia de compradores de los últimos 180 días se ha quedado pequeña de repente.",
+      "fixture": "Dataset de compras con TTL de 90 días; audiencia con lookback de 180 días; caída del 45% en la audiencia el día que se activó el TTL.",
+      "must_find": ["P6 citando TTL y lookback", "Q12 con la variación y la fecha", "Diagnóstico cruzado Q12 ↔ P6", "Restricción: los datos borrados por TTL no se recuperan sin reingesta"],
+      "must_not_report": [],
+      "must_not_recommend": ["Bajar o cambiar el TTL sin revisar la política de retención"]
+    },
+    {
+      "id": "sandbox-desarrollo",
+      "prompt": "Audita la calidad de datos del sandbox dev y dime si producción está bien.",
+      "fixture": "Sandbox de desarrollo con 5.000 perfiles de prueba.",
+      "must_find": ["Límite: no se extrapola a producción"],
+      "must_not_report": ["Conclusiones sobre producción"],
+      "must_not_recommend": []
+    }
+  ]
+}
